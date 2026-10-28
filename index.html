@@ -187,6 +187,55 @@ tr.total td{background:var(--surface-2);font-weight:700}
 @media (prefers-reduced-motion:reduce){.stack{transition:none}}
 @media (max-width:700px){.filters{position:static}}
 @media (max-width:560px){.flabel{min-width:0;width:100%}.kpi .val{font-size:26px}}
+
+/* ---------- report (a printed document: always light) ---------- */
+:root{--r-ink:#16202c;--r-muted:#5a6878;--r-line:#d5dce5;--r-soft:#f1f4f8;--r-accent:#1f4f82;--r-accent-soft:#e3ecf6;--r-good:#16834a;--r-warn:#a87400;--r-bad:#c62828;--r-good-bg:#dff2e6;--r-warn-bg:#fbf0d2;--r-bad-bg:#fbe1e1;--r-paper:#ffffff;--r-backdrop:#5b6573}
+.rshell{position:fixed;inset:0;z-index:55;background:var(--bg);display:flex;flex-direction:column}
+.rbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));padding-top:calc(10px + env(safe-area-inset-top,0px));border-bottom:1px solid var(--line);background:var(--surface)}
+.rbar h3{font-size:16px;margin-right:auto}
+.ropts{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid var(--line);background:var(--surface);font-size:13px}
+.ropts label{display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+.ropts textarea{flex:1 1 320px;min-width:0;min-height:38px;max-height:120px;resize:vertical;border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--bg);font:inherit;font-size:13px}
+.rscroll{flex:1;overflow:auto;background:var(--r-backdrop);padding:24px 16px calc(24px + env(safe-area-inset-bottom,0px))}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.rpt{position:relative;width:794px;margin:0 auto;background:var(--r-paper);color:var(--r-ink);padding:44px 48px 40px;font-family:var(--f-body);font-size:12.5px;line-height:1.55;box-shadow:0 8px 30px rgba(0,0,0,.35)}
+.rpt h1,.rpt h2,.rpt h4{font-family:var(--f-display);margin:0;color:var(--r-ink)}
+.r-head{display:flex;justify-content:space-between;gap:20px;border-bottom:3px solid var(--r-accent);padding-bottom:14px}
+.r-eyebrow{font-size:10.5px;letter-spacing:.14em;color:var(--r-muted);font-weight:600}
+.rpt h1{font-size:26px;margin-top:2px}
+.r-meta{font-size:11.5px;color:var(--r-muted);text-align:right;line-height:1.7;white-space:nowrap}
+.r-meta b{color:var(--r-ink)}
+.r-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0 4px}
+.r-kpi{border:1px solid var(--r-line);border-radius:8px;padding:10px 12px}
+.r-kpi span{display:block;font-size:11px;color:var(--r-muted)}
+.r-kpi b{display:block;font-family:var(--f-display);font-size:24px;line-height:1.2;font-variant-numeric:tabular-nums}
+.r-kpi i{font-style:normal;font-size:10.5px;color:var(--r-muted)}
+.r-kpi.main{border-color:var(--r-accent);background:var(--r-accent-soft)}
+.rb{margin-top:20px}
+.rpt h2{font-size:15px;color:var(--r-accent);margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--r-line)}
+.rpt ul{margin:0;padding-left:18px}
+.rpt li{margin-bottom:3px}
+.rpt table{width:100%;border-collapse:collapse;font-size:11.5px}
+.rpt th,.rpt td{border:1px solid var(--r-line);padding:5px 7px;text-align:left;vertical-align:top}
+.rpt th{background:var(--r-soft);font-weight:600;color:var(--r-muted);font-size:10.5px}
+.rpt td.r,.rpt th.r{text-align:right}
+.rpt td.c,.rpt th.c{text-align:center}
+.rpt .tot td{background:var(--r-soft);font-weight:700}
+.rpt .mono{font-family:var(--f-mono);font-size:10.5px}
+.rpt .muted{color:var(--r-muted)}
+.r-bar{height:9px;background:var(--r-soft);border-radius:2px;min-width:90px;position:relative;margin-top:4px}
+.r-bar i{position:absolute;left:0;top:0;bottom:0;border-radius:2px}
+.rp{display:inline-block;padding:0 7px;border-radius:9px;font-weight:700;font-variant-numeric:tabular-nums}
+.rp.good{background:var(--r-good-bg);color:var(--r-good)}.rp.warn{background:var(--r-warn-bg);color:var(--r-warn)}.rp.bad{background:var(--r-bad-bg);color:var(--r-bad)}
+.r-sc{display:inline-block;min-width:17px;text-align:center;border-radius:3px;color:#fff;font-weight:700;font-size:10.5px;padding:0 3px;margin-right:2px}
+.focus-item{border:1px solid var(--r-line);border-radius:8px;padding:9px 12px;margin-bottom:8px}
+.focus-item h4{font-size:13px;display:flex;justify-content:space-between;gap:10px}
+.focus-item ul{margin-top:4px}
+.r-blank td{height:30px}
+.r-note{background:var(--r-soft);border-radius:6px;padding:10px 12px;white-space:pre-wrap}
+.r-foot{margin-top:22px;padding-top:8px;border-top:1px solid var(--r-line);font-size:10px;color:var(--r-muted);display:flex;justify-content:space-between;gap:12px}
+.rbusy{position:fixed;inset:0;z-index:58;background:rgba(10,18,28,.45);display:grid;place-items:center}
+.rbusy div{background:var(--surface);color:var(--fg);padding:16px 22px;border-radius:12px;font-weight:600}
 </style>
 
 <div class="wrap">
@@ -198,6 +247,7 @@ tr.total td{background:var(--surface-2);font-weight:700}
     </div>
     <div class="ctrls">
       <input type="file" id="file" accept=".xlsx,.xls,.xlsm,.csv" multiple hidden>
+      <button class="btn" id="reportBtn" disabled>สร้างรายงาน</button>
       <button class="btn primary" id="pick">นำเข้าไฟล์ Excel</button>
     </div>
   </header>
@@ -270,6 +320,7 @@ tr.total td{background:var(--surface-2);font-weight:700}
 </div>
 
 <div id="modalRoot"></div>
+<div id="reportRoot" hidden></div>
 <div class="dropzone" id="dropzone" hidden><div>วางไฟล์ Excel ที่นี่<br><span class="muted" style="font-size:14px;font-weight:500">CSI Weekly result (.xlsx)</span></div></div>
 <div class="toast" id="toast" hidden></div>
 
@@ -319,6 +370,7 @@ function renderHeader(){
   $('dealer').textContent = d.dealer || 'CSI Score Analysis';
   const rd = d.reportDate ? ` · Report date ${d.reportDate}` : '';
   $('dropcard').hidden = !d.draft;
+  $('reportBtn').disabled = !!d.draft || !d.rows.length;
   $('filemeta').innerHTML = d.draft ? 'ยังไม่มีข้อมูล · นำเข้าไฟล์เพื่อแสดงชื่อ Partner<span class="tag">Draft</span>' : `${esc(d.fileName)}${esc(rd)} · ${d.rows.length} แบบสำรวจ`;
 }
 
@@ -598,11 +650,223 @@ document.addEventListener('click', e=>{
 });
 document.addEventListener('keydown', e=>{
   if (e.key==='Escape' && $('modalRoot').innerHTML) return closeModal();
+  if (e.key==='Escape' && !$('reportRoot').hidden) return closeReport();
   if ((e.key==='Enter'||e.key===' ') && e.target.matches('.barcol,.mgroup')){ e.preventDefault(); e.target.click(); }
 });
 let qT; $('q').addEventListener('input', e=>{ clearTimeout(qT); qT=setTimeout(()=>{ state.q=e.target.value.trim(); renderAll(); },150); });
 $('onlySel').onchange = e=>{ state.onlySel=e.target.checked; renderAll(); };
 $('onlyCmt').onchange = e=>{ state.onlyCmt=e.target.checked; renderAll(); };
 
+/* ---------- report ---------- */
+const LIBS = { h2c: 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js', pdf: 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js' };
+const libP = {};
+function loadScript(src){ return libP[src] ||= new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=()=>{ delete libP[src]; rej(new Error('load')); }; document.head.append(s); }); }
+const rstate = { cases: true, plan: true, note: '' };
+const R_SC = ['#d92c2c','#ee8a1c','#d9a514','#4bb04f','#16834a'];
+const rBand = v => v==null ? '' : v>=90 ? 'good' : v>=75 ? 'warn' : 'bad';
+const rColor = v => v==null ? '#d5dce5' : v>=90 ? '#16834a' : v>=75 ? '#d9a514' : '#c62828';
+const rsc = s => s==null ? '<span class="muted">–</span>' : `<span class="r-sc" style="background:${R_SC[s-1]}">${s}</span>`;
+const today = () => { const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; };
+
+function periodInfo(rows){
+  const all = [...new Set(state.data.rows.map(r=>r.m))].sort();
+  const ms = state.months.size ? [...state.months].sort() : all;
+  const contiguous = ms.length>1 && ms.every((m,i)=>i===0 || all.indexOf(m)===all.indexOf(ms[i-1])+1);
+  const label = !ms.length ? '–' : ms.length===1 ? monLabel(ms[0]) : contiguous || !state.months.size ? `${monLabel(ms[0])} – ${monLabel(ms[ms.length-1])}` : ms.map(monLabel).join(', ');
+  const key = !ms.length ? 'all' : ms.length===1 ? ms[0] : `${ms[0]}_to_${ms[ms.length-1]}`;
+  return { ms, label: label + ` (${ms.length} เดือน)`, key };
+}
+
+function reportData(){
+  const rows = baseRows(false);
+  const a = calcAll(rows);
+  const scores = [...state.scores].sort();
+  const per = periodInfo(rows);
+  const monthly = per.ms.map(m=>{ const rs=rows.filter(r=>r.m===m); return { m, n:rs.length, ...calcAll(rs) }; }).filter(x=>x.n);
+  const qs = a.qs.map((q,i)=>({ ...q, i, sel: rows.filter(r=>r.s[i]!=null && state.scores.has(r.s[i])).length }));
+  const focus = [...qs].filter(q=>q.sel>0).sort((x,y)=>y.sel-x.sel || (x.score??999)-(y.score??999)).slice(0,3);
+  const unhappy = rows.filter(r=>r.s.some(s=>s!=null && s<=2)).length;
+  const selCases = rows.filter(hasSel).sort(caseSort);
+  return { rows, a, scores, per, monthly, qs, focus, unhappy, selCases };
+}
+
+function summaryLines(D){
+  const { a, rows, per, monthly, qs, focus, unhappy, scores } = D;
+  const L = [];
+  L.push(`CSI โดยรวม <b>${fmt(a.csi)}</b> และ NPS <b>${fmt(a.nps)}</b> จาก ${rows.length} แบบสำรวจ ช่วง ${esc(per.label)}`);
+  const low = [...qs.slice(0,8)].filter(q=>q.score!=null).sort((x,y)=>x.score-y.score).slice(0,3);
+  if (low.length) L.push(`ข้อที่คะแนนต่ำสุด: ${low.map(q=>`Q${q.i+1} ${esc(SHORT[q.i])} (${fmt(q.score)})`).join(', ')}`);
+  if (focus.length) L.push(`ข้อที่มีเคสได้คะแนน ${scores.join(', ')} มากที่สุด: ${focus.map(q=>`Q${q.i+1} ${esc(SHORT[q.i])} ${q.sel} เคส`).join(' · ')}`);
+  L.push(`แบบสำรวจที่มีอย่างน้อย 1 ข้อได้คะแนน 1–2 (Unhappy): <b>${unhappy}</b> เคส (${rows.length ? (unhappy/rows.length*100).toFixed(1) : 0}%)`);
+  if (monthly.length>=2){
+    const last = monthly[monthly.length-1], prev = monthly[monthly.length-2];
+    if (last.csi!=null && prev.csi!=null){ const d = last.csi-prev.csi;
+      L.push(`เดือนล่าสุด ${monLabel(last.m)}: CSI ${fmt(last.csi)} (${d>=0?'+':''}${d.toFixed(1)} จาก ${monLabel(prev.m)}) · NPS ${fmt(last.nps)}`); }
+    const worst = [...monthly].filter(x=>x.csi!=null).sort((x,y)=>x.csi-y.csi)[0];
+    if (worst) L.push(`เดือนที่ CSI ต่ำสุด: ${monLabel(worst.m)} (${fmt(worst.csi)}, n=${worst.n})`);
+  }
+  return L;
+}
+
+function reportHtml(){
+  const D = reportData(), d = state.data, { a, rows, per, monthly, qs, focus, scores, selCases } = D;
+  const unhappyPct = rows.length ? (D.unhappy/rows.length*100).toFixed(1)+'%' : '–';
+  let sec = 0; const H = t => `<h2>${++sec}. ${t}</h2>`;
+  const bar = v => `<div class="r-bar"><i style="width:${Math.max(0,Math.min(100,v??0))}%;background:${rColor(v)}"></i></div>`;
+  const qRow = q => `<tr><td><b>Q${q.i+1}</b></td><td>${esc(stripQ(d.qText[q.i]))}</td><td class="r">${q.H}</td><td class="r">${q.N3}</td><td class="r">${q.U}</td><td class="r">${q.N}</td><td style="width:120px"><span class="rp ${rBand(q.score)}">${fmt(q.score)}</span>${bar(q.score)}</td></tr>`;
+  const lowQs = r => r.s.map((s,i)=> s!=null && state.scores.has(s) ? `Q${i+1}&nbsp;${rsc(s)}` : '').filter(Boolean).join(' ');
+  const cmts = r => [...r.c.map((c,i)=> c ? `<div><b>Q${i+1}:</b> ${esc(c)}</div>` : ''), r.o ? `<div><b>อื่นๆ:</b> ${esc(r.o)}</div>` : ''].join('') || '<span class="muted">–</span>';
+
+  let h = `<div class="rpt" id="rpt">
+  <div class="r-head"><div><div class="r-eyebrow">CSI REPORT · GWM AFTERSALES · CSI 2026</div><h1>${esc(d.dealer)}</h1>
+    <div class="muted" style="font-size:12px">รายงานผลความพึงพอใจลูกค้างานบริการ (CSI / NPS)</div></div>
+    <div class="r-meta">ช่วงข้อมูล <b>${esc(per.label)}</b><br>Report date (ไฟล์) <b>${esc(d.reportDate||'–')}</b><br>วันที่สร้างรายงาน <b>${today()}</b>${state.q?`<br>ค้นหา <b>${esc(state.q)}</b>`:''}</div></div>
+  <div class="r-kpis">
+    <div class="r-kpi main"><span>CSI โดยรวม (Q1–Q8)</span><b>${fmt(a.csi)}</b><i>${a.csiSum.toFixed(1)} ÷ ${a.csiCount}</i></div>
+    <div class="r-kpi main"><span>NPS (Q9)</span><b>${fmt(a.nps)}</b><i>(${a.qs[8].H} − ${a.qs[8].U}) ÷ ${a.qs[8].N} × 100</i></div>
+    <div class="r-kpi"><span>จำนวนแบบสำรวจ</span><b>${rows.length}</b><i>${per.ms.length} เดือน</i></div>
+    <div class="r-kpi"><span>เคส Unhappy (1–2)</span><b>${D.unhappy}</b><i>${unhappyPct} ของแบบสำรวจ</i></div>
+  </div>
+  <div class="rb">${H('สรุปผล')}<ul>${summaryLines(D).map(l=>`<li>${l}</li>`).join('')}</ul></div>
+  <div class="rb">${H('คะแนนรายข้อ')}<table><thead><tr><th>ข้อ</th><th>หัวข้อ</th><th class="r">Happy<br>(4–5)</th><th class="r">Neutral<br>(3)</th><th class="r">Unhappy<br>(1–2)</th><th class="r">N</th><th>คะแนน</th></tr></thead>
+    <tbody>${qs.slice(0,8).map(qRow).join('')}
+    <tr class="tot"><td colspan="6">CSI โดยรวม = ผลรวม CSI ข้อ 1–8 ÷ ${a.csiCount}</td><td><span class="rp ${rBand(a.csi)}">${fmt(a.csi)}</span></td></tr>
+    ${qRow(qs[8]).replace('<tr>','<tr class="tot">').replace('<b>Q9</b>','<b>NPS Q9</b>')}</tbody></table>
+    <div class="muted" style="font-size:10.5px;margin-top:4px">คะแนนแต่ละข้อ = (Happy − Unhappy) ÷ จำนวนลูกค้าที่ถูกสำรวจ × 100% · เกณฑ์สี: ≥ 90% / 75–89.9% / &lt; 75%</div></div>`;
+
+  if (monthly.length){
+    h += `<div class="rb">${H('แนวโน้มรายเดือน')}<table><thead><tr><th>เดือน</th><th class="r">N</th><th>CSI</th><th>NPS</th><th>ข้อที่ต่ำสุดของเดือน</th></tr></thead><tbody>
+      ${monthly.map(x=>{ const lo=[...x.qs.slice(0,8).map((q,i)=>({...q,i}))].filter(q=>q.score!=null).sort((p,q)=>p.score-q.score)[0];
+        return `<tr><td>${monLabel(x.m)}</td><td class="r">${x.n}</td><td style="width:150px"><span class="rp ${rBand(x.csi)}">${fmt(x.csi)}</span>${bar(x.csi)}</td><td style="width:150px"><span class="rp ${rBand(x.nps)}">${fmt(x.nps)}</span>${bar(x.nps)}</td><td>${lo && lo.score<100 ? `Q${lo.i+1} ${esc(SHORT[lo.i])} (${fmt(lo.score)})` : '<span class="muted">ทุกข้อ 100%</span>'}</td></tr>`; }).join('')}
+    </tbody></table></div>`;
+  }
+
+  h += `<div class="rb">${H(`ประเด็นที่ต้องโฟกัส (คะแนน ${scores.join(', ')||'–'})`)}${!focus.length ? '<div class="muted">ไม่มีเคสที่ได้คะแนนตามที่เลือกในช่วงนี้</div>' :
+    focus.map((q,k)=>{ const list = rows.filter(r=>r.s[q.i]!=null && state.scores.has(r.s[q.i])).sort((x,y)=>x.s[q.i]-y.s[q.i]);
+      const withC = list.filter(r=>r.c[q.i]||r.o);
+      return `<div class="focus-item"><h4><span>${k+1}. Q${q.i+1} ${esc(SHORT[q.i])}</span><span class="muted" style="font-family:var(--f-body);font-weight:500;font-size:11.5px">${q.sel} เคส · คะแนนข้อ ${fmt(q.score)}</span></h4>
+        <ul>${withC.length ? withC.slice(0,8).map(r=>`<li>${rsc(r.s[q.i])} ${esc(r.c[q.i] || r.o)} <span class="muted mono">${esc(r.sp)}</span></li>`).join('') : '<li class="muted">ลูกค้าไม่ได้ให้เหตุผล</li>'}
+        ${withC.length>8 ? `<li class="muted">และอีก ${withC.length-8} ความเห็น</li>`:''}</ul></div>`; }).join('')}</div>`;
+
+  if (rstate.cases){
+    h += `<div class="rb">${H(`รายการเคสที่ได้คะแนน ${scores.join(', ')||'–'} (${selCases.length} เคส)`)}${!selCases.length ? '<div class="muted">ไม่มีเคส</div>' :
+      `<table><thead><tr><th>เดือน</th><th>SP / VIN</th><th>ประเภทลูกค้า</th><th>ข้อที่ได้คะแนนตามที่เลือก</th><th>ความเห็นลูกค้า</th></tr></thead><tbody>
+      ${selCases.map(r=>`<tr><td style="white-space:nowrap">${monLabel(r.m)}<div class="muted">${esc(r.ad)}</div></td><td><span class="mono">${esc(r.sp)}</span><div class="mono muted">${esc(r.vin)}</div></td><td>${esc(r.ct)}</td><td style="line-height:1.9">${lowQs(r)}</td><td>${cmts(r)}</td></tr>`).join('')}
+      </tbody></table>`}</div>`;
+  }
+  if (rstate.plan){
+    const items = focus.length ? focus.map(q=>`Q${q.i+1} ${esc(SHORT[q.i])}`) : [];
+    while (items.length < 3) items.push('');
+    h += `<div class="rb">${H('แผนการแก้ไข (Action Plan)')}<table class="r-blank"><thead><tr><th style="width:22%">ประเด็น</th><th style="width:22%">สาเหตุ</th><th>แนวทางแก้ไข</th><th style="width:14%">ผู้รับผิดชอบ</th><th style="width:12%">กำหนดเสร็จ</th></tr></thead>
+      <tbody>${items.map(t=>`<tr><td>${t}</td><td></td><td></td><td></td><td></td></tr>`).join('')}</tbody></table></div>`;
+  }
+  if (rstate.note.trim()) h += `<div class="rb">${H('ความเห็นเพิ่มเติม')}<div class="r-note">${esc(rstate.note.trim())}</div></div>`;
+  h += `<div class="r-foot"><span>Happy = 4–5 · Neutral = 3 · Unhappy = 1–2 · เกณฑ์ CSI 2026 มีผลตั้งแต่ 1 ม.ค. 2569 · ไฟล์ ${esc(d.fileName)}</span><span style="white-space:nowrap">Generated by CSI Score Analysis · Created by Natchanon C.</span></div></div>`;
+  return h;
+}
+
+function openReport(){
+  if (state.data.draft || !state.data.rows.length) return toast('นำเข้าไฟล์ Excel ก่อนสร้างรายงาน');
+  const root = $('reportRoot');
+  root.innerHTML = `<div class="rshell" role="dialog" aria-modal="true" aria-label="รายงาน">
+    <div class="rbar"><h3>รายงาน CSI · ${esc(state.data.dealer)}</h3>
+      <button class="btn primary" id="rPdf">ดาวน์โหลด PDF</button><button class="btn" id="rXlsx">ดาวน์โหลด Excel</button><button class="btn" id="rClose">ปิด</button></div>
+    <div class="ropts"><span class="muted">ใช้ตัวกรองปัจจุบัน (เดือน · คะแนน · ค้นหา)</span>
+      <label><input type="checkbox" id="rCases" ${rstate.cases?'checked':''}> รายการเคส</label>
+      <label><input type="checkbox" id="rPlan" ${rstate.plan?'checked':''}> แผนการแก้ไข</label>
+      <textarea id="rNote" placeholder="ความเห็นเพิ่มเติม / ข้อสรุปของ RSM (ไม่บังคับ)">${esc(rstate.note)}</textarea></div>
+    <div class="rscroll" id="rScroll">${reportHtml()}</div></div>`;
+  root.hidden = false; document.body.style.overflow = 'hidden';
+  const rerender = () => { $('rScroll').innerHTML = reportHtml(); };
+  $('rCases').onchange = e => { rstate.cases = e.target.checked; rerender(); };
+  $('rPlan').onchange = e => { rstate.plan = e.target.checked; rerender(); };
+  let nt; $('rNote').oninput = e => { rstate.note = e.target.value; clearTimeout(nt); nt = setTimeout(rerender, 300); };
+  $('rClose').onclick = closeReport;
+  $('rPdf').onclick = exportPdf;
+  $('rXlsx').onclick = exportXlsx;
+  $('rPdf').focus();
+}
+function closeReport(){ $('reportRoot').hidden = true; $('reportRoot').innerHTML = ''; document.body.style.overflow = ''; $('reportBtn').focus(); }
+
+const fileBase = () => `CSI_Report_${(state.data.dealer||'Partner').replace(/[^A-Za-z0-9]+/g,'_').replace(/^_|_$/g,'') || 'Partner'}_${periodInfo().key}`;
+function busy(on, msg){ let b = document.getElementById('rBusy'); if (!on){ b?.remove(); return; } if (!b){ b = document.createElement('div'); b.id='rBusy'; b.className='rbusy'; document.body.append(b); } b.innerHTML = `<div>${msg}</div>`; }
+
+let dlP = null;
+function getDownloads(){ if (!window.claude?.use) return Promise.resolve(null); return dlP ||= window.claude.use('downloads').catch(()=>null); }
+async function saveFile(filename, data, mime){
+  if (window.claude?.use){
+    const dl = await getDownloads();
+    if (!dl) return toast('การดาวน์โหลดใช้ไม่ได้ในมุมมองนี้ ลองเปิดหน้านี้ใน claude.ai');
+    try { await dl.save({ filename, data }); toast(`บันทึก ${filename} แล้ว`); }
+    catch (e){ if (e?.code==='declined') return; toast(e?.code==='rate_limited' ? 'มีหน้าต่างบันทึกเปิดอยู่ ลองอีกครั้งสักครู่' : `บันทึกไฟล์ไม่สำเร็จ (${e?.code||'error'})`); }
+    return;
+  }
+  const url = URL.createObjectURL(new Blob([data], { type: mime }));
+  const a = document.createElement('a'); a.href = url; a.download = filename; document.body.append(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url), 5000); toast(`ดาวน์โหลด ${filename}`);
+}
+
+function relTop(n, root){ let y = 0; while (n && n !== root){ y += n.offsetTop; n = n.offsetParent; } return y; }
+async function exportPdf(){
+  busy(true, 'กำลังสร้าง PDF…');
+  try {
+    await Promise.all([loadScript(LIBS.h2c), loadScript(LIBS.pdf)]);
+    await document.fonts.ready;
+    const el = $('rpt'), W = el.offsetWidth, Ht = el.offsetHeight, scale = 2;
+    const canvas = await html2canvas(el, { scale, backgroundColor: '#ffffff', logging: false });
+    const pageH = W * 277 / 210;
+    const cands = [...el.querySelectorAll('.rb, tbody tr:not(:first-child), li:not(:first-child), .focus-item, .r-foot')].map(n=>relTop(n, el)).filter(y=>y>0).sort((p,q)=>p-q);
+    const pages = []; let s = 0;
+    while (s < Ht - 1){
+      let e = s + pageH;
+      if (e >= Ht) e = Ht; else { const c = cands.filter(y=>y > s + pageH*0.4 && y <= e); if (c.length) e = c[c.length-1]; }
+      pages.push([s, e]); s = e;
+    }
+    const pdf = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4' });
+    const ascii = (state.data.dealer||'').replace(/[^\x20-\x7E]/g,'').trim();
+    pages.forEach(([s0, e0], i) => {
+      if (i) pdf.addPage();
+      const c = document.createElement('canvas'); c.width = canvas.width; c.height = Math.max(1, Math.round((e0 - s0) * scale));
+      const g = c.getContext('2d'); g.fillStyle = '#ffffff'; g.fillRect(0,0,c.width,c.height);
+      g.drawImage(canvas, 0, Math.round(s0*scale), canvas.width, c.height, 0, 0, canvas.width, c.height);
+      pdf.addImage(c.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 10, 210, (e0 - s0) * 210 / W);
+      pdf.setFontSize(8); pdf.setTextColor(110);
+      pdf.text(`CSI Report${ascii ? ' · ' + ascii : ''} · Created by Natchanon C.`, 12, 291);
+      pdf.text(`${i+1} / ${pages.length}`, 198, 291, { align: 'right' });
+    });
+    pdf.setProperties({ title: `CSI Report ${ascii}`, author: 'Natchanon C.' });
+    busy(false);
+    await saveFile(fileBase() + '.pdf', pdf.output('arraybuffer'), 'application/pdf');
+  } catch (e){ console.error(e); busy(false); toast('สร้าง PDF ไม่สำเร็จ ตรวจสอบอินเทอร์เน็ตแล้วลองใหม่'); }
+}
+
+async function exportXlsx(){
+  if (typeof XLSX==='undefined') return toast('โหลดตัวอ่าน Excel ไม่สำเร็จ ตรวจสอบอินเทอร์เน็ตแล้วรีเฟรชหน้า');
+  const D = reportData(), d = state.data, r1 = v => v==null ? null : Math.round(v*10)/10;
+  const wb = XLSX.utils.book_new();
+  const add = (name, aoa, cols) => { const ws = XLSX.utils.aoa_to_sheet(aoa); if (cols) ws['!cols'] = cols.map(w=>({wch:w})); XLSX.utils.book_append_sheet(wb, ws, name); };
+  add('Summary', [
+    ['CSI Report', d.dealer], ['ช่วงข้อมูล', D.per.label], ['Report date (ไฟล์)', d.reportDate||''], ['วันที่สร้างรายงาน', today()], ['ไฟล์ต้นฉบับ', d.fileName],
+    ['ค้นหา', state.q||'-'], ['คะแนนที่วิเคราะห์', D.scores.join(', ')], [],
+    ['CSI โดยรวม (%)', r1(D.a.csi)], ['NPS (%)', r1(D.a.nps)], ['จำนวนแบบสำรวจ', D.rows.length], ['เคส Unhappy (1–2)', D.unhappy], [],
+    ['สรุปผล'], ...summaryLines(D).map(l=>[l.replace(/<[^>]+>/g,'')]),
+    ...(rstate.note.trim() ? [[], ['ความเห็นเพิ่มเติม', rstate.note.trim()]] : []),
+    [], ['Generated by CSI Score Analysis · Created by Natchanon C.']
+  ], [24, 90]);
+  add('By Question', [['ข้อ','หัวข้อ','Happy (4–5)','Neutral (3)','Unhappy (1–2)','N','คะแนน (%)', `เคสคะแนน ${D.scores.join(',')}`],
+    ...D.qs.map(q=>[`Q${q.i+1}`, stripQ(d.qText[q.i]), q.H, q.N3, q.U, q.N, r1(q.score), q.sel]),
+    [], ['CSI โดยรวม (Q1–Q8)', '', '', '', '', '', r1(D.a.csi)], ['NPS (Q9)', '', '', '', '', '', r1(D.a.nps)]], [8, 70, 11, 11, 13, 6, 11, 14]);
+  add('Monthly', [['เดือน','N', ...SHORT.map((s,i)=>`Q${i+1}`), 'CSI', 'NPS'],
+    ...D.monthly.map(x=>[monLabel(x.m), x.n, ...x.qs.map(q=>r1(q.score)), r1(x.csi), r1(x.nps)])], [10, 6, ...Array(11).fill(8)]);
+  add('Cases', [['เดือน','Week','วันที่รับรถ','วันที่ส่งมอบ','SP','VIN','ชื่อลูกค้า','ประเภทลูกค้า','หมวดงานซ่อม','ประเภทงานซ่อม', ...SHORT.map((s,i)=>`Q${i+1}`), 'CSI เคส (%)', `มีคะแนน ${D.scores.join(',')}`, ...SHORT.map((s,i)=>`เหตุผล Q${i+1}`), 'ข้อเสนอแนะอื่นๆ'],
+    ...[...D.rows].sort(caseSort).map(r=>[monLabel(r.m), r.w, r.ad, r.dd, r.sp, r.vin, r.nm, r.ct, r.rc, r.rt, ...r.s, r1(calcAll([r]).csi), hasSel(r)?'Y':'', ...r.c, r.o])],
+    [8, 9, 11, 11, 20, 20, 20, 18, 16, 30, ...Array(9).fill(5), 10, 10, ...Array(9).fill(28), 36]);
+  if (rstate.plan) add('Action Plan', [['ประเด็น','เคส','คะแนนข้อ (%)','สาเหตุ','แนวทางแก้ไข','ผู้รับผิดชอบ','กำหนดเสร็จ','สถานะ'],
+    ...D.focus.map(q=>[`Q${q.i+1} ${SHORT[q.i]}`, q.sel, r1(q.score), '', '', '', '', '']), ['', '', '', '', '', '', '', '']], [26, 6, 12, 30, 40, 16, 12, 12]);
+  const buf = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+  await saveFile(fileBase() + '.xlsx', buf, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+}
+
+$('reportBtn').onclick = openReport;
 renderAll();
 </script>
