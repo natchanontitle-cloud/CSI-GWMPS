@@ -347,6 +347,7 @@ table.t td.nw{white-space:nowrap}
       <button class="btn sm primary" id="repBtn" data-act="psReport" hidden></button>
       <button class="btn sm primary" id="upBtn" data-act="pickAny"></button><input type="file" id="gFile" accept=".xlsx,.xls,.xlsm,.csv" hidden>
       <button class="btn sm" id="roleBtn" data-act="backRsm" hidden></button>
+      <div class="seg" id="setSeg" role="group" aria-label="RSM set" hidden><button data-set="RSM1">RSM1</button><button data-set="RSM2">RSM2</button></div>
       <button class="btn sm" id="themeBtn" data-act="theme" aria-label="Day / Night"></button>
       <div class="seg" id="langSeg" role="group" aria-label="Language"><button data-lang="th">ไทย</button><button data-lang="en">EN</button></div>
     </div>
@@ -648,6 +649,10 @@ const PS_ALIAS = { 'gwm-phra-nakorn-saraburi': 'gwm-pag-saraburi', 'gwm-phra-nak
 const REMOVED_PS = new Set(['gwm-intertrade-singburi']);   /* closed partners: never imported, never listed */
 const cleanMap = rows => Object.fromEntries(Object.entries(rows || {}).filter(([k]) => !REMOVED_PS.has(k)));
 const DEFAULT_MAP = {"gwm-charansanitwong":{"ps":"GWM Charansanitwong","region":"BKK&MET","rsm":"Natchanon"},"gwm-pag-udomsuk":{"ps":"GWM PAG Udomsuk","region":"BKK&MET","rsm":"Chanrob"},"gwm-p-and-y-sukhothai":{"ps":"GWM P and Y Sukhothai","region":"North","rsm":"Natthaphol"},"gwm-anuphas-phuket":{"ps":"GWM Anuphas Phuket","region":"South","rsm":"Natchanon"},"gwm-amorn-ratchada":{"ps":"GWM Amorn Ratchada","region":"BKK&MET","rsm":"Chanrob"},"gwm-ek-rayong":{"ps":"GWM Ek Rayong","region":"Easten","rsm":"Chanrob"},"gwm-ccc-auto-ubonratchathani":{"ps":"GWM CCC Auto Ubonratchathani","region":"Northeast","rsm":"Kiattikhun"},"gwm-great-one-auto-chaengwattana":{"ps":"GWM Great One Auto Chaengwattana","region":"BKK&MET","rsm":"Chanrob"},"gwm-eaksaha-korat":{"ps":"GWM Eaksaha Korat","region":"Northeast","rsm":"Chanrob"},"gwm-v-ultimatecar-bang-bua-thong":{"ps":"GWM V Ultimatecar Bang Bua Thong","region":"BKK&MET","rsm":"Kiattikhun"},"gwm-prestige-pathumthani":{"ps":"GWM Prestige Pathumthani","region":"BKK&MET","rsm":"Kiattikhun"},"gwm-apm-ayutthaya":{"ps":"GWM APM Ayutthaya","region":"Central","rsm":"Natthaphol"},"gwm-chookiat-krabi":{"ps":"GWM Chookiat Krabi","region":"South","rsm":"Natchanon"},"gwm-ch-erawan-ratchaburi":{"ps":"GWM Ch.Erawan Ratchaburi","region":"Central","rsm":"Natthaphol"},"gwm-maverick-auto-ramkhamhaeng":{"ps":"GWM Maverick Auto Ramkhamhaeng","region":"BKK&MET","rsm":"Natthaphol"},"gwm-a-s-surin":{"ps":"GWM A S Surin","region":"Northeast","rsm":"Kiattikhun"},"gwm-chookiat-hatyai":{"ps":"GWM Chookiat Hatyai","region":"South","rsm":"Natchanon"},"gwm-ccc-auto-lampang":{"ps":"GWM CCC Auto Lampang","region":"North","rsm":"Natthaphol"},"gwm-pattanachaiyon-loei":{"ps":"GWM Pattanachaiyon Loei","region":"Northeast","rsm":"Kiattikhun"},"gwm-angelway-chiangrai":{"ps":"GWM Angelway Chiangrai","region":"North","rsm":"Natthaphol"},"gwm-ch-erawan-kanchanaburi":{"ps":"GWM Ch.Erawan Kanchanaburi","region":"Central","rsm":"Natthaphol"},"gwm-pag-saraburi":{"ps":"GWM PAG Saraburi","region":"Central","rsm":"Chanrob"},"gwm-ccc-auto-roiet":{"ps":"GWM CCC Auto Roiet","region":"Northeast","rsm":"Kiattikhun"},"gwm-tara-huahin":{"ps":"GWM Tara Huahin","region":"South","rsm":"Natchanon"},"gwm-chookiat-nakhon-si-thammarat":{"ps":"GWM Chookiat Nakhon Si Thammarat","region":"South","rsm":"Natchanon"},"gwm-angelway-phayao":{"ps":"GWM Angelway Phayao","region":"North","rsm":"Natthaphol"},"gwm-pijitphet-sakonnakhon":{"ps":"GWM Pijitphet Sakonnakhon","region":"Northeast","rsm":"Kiattikhun"},"gwm-pijitphet-mukdahan":{"ps":"GWM Pijitphet Mukdahan","region":"Northeast","rsm":"Kiattikhun"},"gwm-ek-chanthaburi":{"ps":"GWM Ek Chanthaburi","region":"Easten","rsm":"Chanrob"},"gwm-ch-erawan-suphanburi":{"ps":"GWM Ch.Erawan Suphanburi","region":"Central","rsm":"Natthaphol"},"gwm-thairungruang-lopburi":{"ps":"GWM Thairungruang Lopburi","region":"Central","rsm":"Kiattikhun"},"gwm-eaksaha-plus-buriram":{"ps":"GWM Eaksaha Plus Buriram","region":"Northeast","rsm":"Chanrob"},"gwm-finn-ev-nong-bua-lamphu":{"ps":"GWM Finn EV Nong Bua Lamphu","region":"Northeast","rsm":"Kiattikhun"},"gwm-m1x-phitsanulok":{"ps":"GWM M1X Phitsanulok","region":"North","rsm":"Natthaphol"},"gwm-big-auto-sisaket":{"ps":"GWM BIG AUTO Sisaket","region":"Northeast","rsm":"Kiattikhun"},"gwm-sitthiphan-phetchaburi":{"ps":"GWM Sitthiphan Phetchaburi","region":"Central","rsm":"Natchanon"},"gwm-startrek-suanluang":{"ps":"GWM Startrek Suanluang","region":"BKK&MET","rsm":"Natthaphol"},"gwm-iconic-ramintra":{"ps":"GWM Iconic Ramintra","region":"BKK&MET","rsm":"Chanrob"},"gwm-motor-mall-rama-2":{"ps":"GWM Motor Mall Rama 2","region":"BKK&MET","rsm":"Natchanon"},"gwm-m1x-maesod":{"ps":"GWM M1X Maesod","region":"North","rsm":"Natthaphol"},"gwm-ccc-auto-chiangmai":{"ps":"GWM CCC Auto Chiangmai","region":"North","rsm":"Natthaphol"},"gwm-prestige-thanyaburi":{"ps":"GWM Prestige Thanyaburi","region":"BKK&MET","rsm":"Kiattikhun"},"gwm-kt-suratthani":{"ps":"GWM KT Suratthani","region":"South","rsm":"Natchanon"},"gwm-first-class-motor-chachoengsao":{"ps":"GWM First Class Motor Chachoengsao","region":"Easten","rsm":"Chanrob"},"gwm-origin-chumphon":{"ps":"GWM Origin Chumphon","region":"South","rsm":"Natchanon"},"gwm-suvarnabhumi-ladkrabang":{"ps":"GWM Suvarnabhumi Ladkrabang","region":"BKK&MET","rsm":"Natthaphol"},"gwm-pag-nakhonsawan":{"ps":"GWM PAG Nakhonsawan","region":"North","rsm":"Chanrob"},"gwm-premier-srinakarin":{"ps":"GWM Premier Srinakarin","region":"BKK&MET","rsm":"Natthaphol"},"gwm-nava-auto-navanakorn":{"ps":"GWM Nava Auto Navanakorn","region":"BKK&MET","rsm":"Natchanon"},"gwm-168-kanchanaphisek":{"ps":"GWM 168 Kanchanaphisek","region":"BKK&MET","rsm":"Natchanon"},"gwm-one-theparak":{"ps":"GWM One Theparak","region":"BKK&MET","rsm":"Natthaphol"},"gwm-ccc-auto-chiangmai-maerim":{"ps":"GWM CCC Auto Chiangmai Maerim","region":"North","rsm":"Natthaphol"},"gwm-ch-erawan-nakhonpathom":{"ps":"GWM Ch.Erawan Nakhonpathom","region":"Central","rsm":"Natthaphol"},"gwm-charoen-auto-house-chaiyaphum":{"ps":"GWM Charoen Auto House Chaiyaphum","region":"Northeast","rsm":"Chanrob"},"gwm-areemit-mahasarakham":{"ps":"GWM Areemit Mahasarakham","region":"Northeast","rsm":"Kiattikhun"},"gwm-ccc-auto-vacharaphol":{"ps":"GWM CCC Auto Vacharaphol","region":"BKK&MET","rsm":"Chanrob"},"gwm-tongcharoen-samutsakhon":{"ps":"GWM Tongcharoen Samutsakhon","region":"Central","rsm":"Natchanon"},"gwm-life-nonthaburi":{"ps":"GWM Life Nonthaburi","region":"BKK&MET","rsm":"Kiattikhun"},"gwm-eaksaha-phahonyothin-km-25":{"ps":"GWM Eaksaha Phahonyothin KM.25","region":"BKK&MET","rsm":"Chanrob"},"gwm-anuphas-phuket-kathu":{"ps":"GWM Anuphas Phuket Kathu","region":"South","rsm":"Natchanon"},"gwm-ek-ari":{"ps":"GWM Ek Ari","region":"BKK&MET","rsm":"Kiattikhun"},"gwm-bangkok-chan-road":{"ps":"GWM Bangkok Chan Road","region":"BKK&MET","rsm":"Natchanon"},"gwm-yas-yala":{"ps":"GWM YAS YALA","region":"South","rsm":"Natchanon"},"gwm-teeka-udonthani":{"ps":"GWM Teeka Udonthani","region":"Northeast","rsm":"Kiattikhun"},"gwm-karman-wongsawang":{"ps":"GWM Karman Wongsawang","region":"BKK&MET","rsm":"Kiattikhun"},"gwm-ek-rayong-pluakdaeng":{"ps":"GWM Ek Rayong Pluakdaeng","region":"Central","rsm":"Chanrob"},"gwm-chookiat-songkhla":{"ps":"GWM Chookiat Songkhla","region":"South","rsm":"Natchanon"},"gwm-mm-lamphun":{"ps":"GWM MM Lamphun","region":"North","rsm":"Natthaphol"},"gwm-sahachai-ev-plus-khonkaen":{"ps":"GWM Sahachai EV Plus Khonkaen","region":"Northeast","rsm":"Kiattikhun"},"gwm-ek-chonburi":{"ps":"GWM Ek Chonburi","region":"Easten","rsm":"Chanrob"},"gwm-ek-pattaya":{"ps":"GWM Ek Pattaya","region":"Easten","rsm":"Chanrob"},"gwm-a-n-n-pattani":{"ps":"GWM A.N.N. Pattani","region":"South","rsm":"Natchanon"},"gwm-mundee-kalasin":{"ps":"GWM Mundee Kalasin","region":"Northeast","rsm":"Kiattikhun"},"gwm-aag-rangsit":{"ps":"GWM AAG Rangsit","region":"BKK&MET","rsm":"Natthaphol"},"gwm-e-v-s-plus-nonthaburi":{"ps":"GWM E.V.S Plus Nonthaburi","region":"BKK&MET","rsm":"Kiattikhun"},"gwm-thaiyont-next-sisaket":{"ps":"GWM Thaiyont Next Sisaket","region":"Northeast","rsm":"Kiattikhun"},"gwm-metro-hathairat":{"ps":"GWM Metro Hathairat","region":"BKK&MET","rsm":"Chanrob"},"gwm-maporn-lamlukka":{"ps":"GWM Maporn Lamlukka","region":"BKK&MET","rsm":"Natchanon"}};
+const DEFAULT_MAP2 = {"gwm-charansanitwong":{"ps":"GWM Charansanitwong","region":"BKK&MET","rsm":"Natchanon"},"gwm-pag-udomsuk":{"ps":"GWM PAG Udomsuk","region":"BKK&MET","rsm":"Chanrob"},"gwm-p-and-y-sukhothai":{"ps":"GWM P and Y Sukhothai","region":"North","rsm":"Natthaphol"},"gwm-anuphas-phuket":{"ps":"GWM Anuphas Phuket","region":"South","rsm":"Naruwit"},"gwm-amorn-ratchada":{"ps":"GWM Amorn Ratchada","region":"BKK&MET","rsm":"Yuthtaphon"},"gwm-ek-rayong":{"ps":"GWM Ek Rayong","region":"Easten","rsm":"Chanrob"},"gwm-ccc-auto-ubonratchathani":{"ps":"GWM CCC Auto Ubonratchathani","region":"Northeast","rsm":"Kiattikhun"},"gwm-great-one-auto-chaengwattana":{"ps":"GWM Great One Auto Chaengwattana","region":"BKK&MET","rsm":"Naruwit"},"gwm-eaksaha-korat":{"ps":"GWM Eaksaha Korat","region":"Northeast","rsm":"Naruwit"},"gwm-v-ultimatecar-bang-bua-thong":{"ps":"GWM V Ultimatecar Bang Bua Thong","region":"BKK&MET","rsm":"Kiattikhun"},"gwm-prestige-pathumthani":{"ps":"GWM Prestige Pathumthani","region":"BKK&MET","rsm":"Yuthtaphon"},"gwm-apm-ayutthaya":{"ps":"GWM APM Ayutthaya","region":"Central","rsm":"Yuthtaphon"},"gwm-chookiat-krabi":{"ps":"GWM Chookiat Krabi","region":"South","rsm":"Natchanon"},"gwm-ch-erawan-ratchaburi":{"ps":"GWM Ch.Erawan Ratchaburi","region":"Central","rsm":"Yuthtaphon"},"gwm-maverick-auto-ramkhamhaeng":{"ps":"GWM Maverick Auto Ramkhamhaeng","region":"BKK&MET","rsm":"Natthaphol"},"gwm-a-s-surin":{"ps":"GWM A S Surin","region":"Northeast","rsm":"Naruwit"},"gwm-chookiat-hatyai":{"ps":"GWM Chookiat Hatyai","region":"South","rsm":"Natchanon"},"gwm-ccc-auto-lampang":{"ps":"GWM CCC Auto Lampang","region":"North","rsm":"Natthaphol"},"gwm-pattanachaiyon-loei":{"ps":"GWM Pattanachaiyon Loei","region":"Northeast","rsm":"Kiattikhun"},"gwm-angelway-chiangrai":{"ps":"GWM Angelway Chiangrai","region":"North","rsm":"Natthaphol"},"gwm-ch-erawan-kanchanaburi":{"ps":"GWM Ch.Erawan Kanchanaburi","region":"Central","rsm":"Natthaphol"},"gwm-pag-saraburi":{"ps":"GWM PAG Saraburi","region":"Central","rsm":"Chanrob"},"gwm-ccc-auto-roiet":{"ps":"GWM CCC Auto Roiet","region":"Northeast","rsm":"Kiattikhun"},"gwm-tara-huahin":{"ps":"GWM Tara Huahin","region":"South","rsm":"Naruwit"},"gwm-chookiat-nakhon-si-thammarat":{"ps":"GWM Chookiat Nakhon Si Thammarat","region":"South","rsm":"Natchanon"},"gwm-angelway-phayao":{"ps":"GWM Angelway Phayao","region":"North","rsm":"Natthaphol"},"gwm-pijitphet-sakonnakhon":{"ps":"GWM Pijitphet Sakonnakhon","region":"Northeast","rsm":"Kiattikhun"},"gwm-pijitphet-mukdahan":{"ps":"GWM Pijitphet Mukdahan","region":"Northeast","rsm":"Kiattikhun"},"gwm-ek-chanthaburi":{"ps":"GWM Ek Chanthaburi","region":"Easten","rsm":"Chanrob"},"gwm-ch-erawan-suphanburi":{"ps":"GWM Ch.Erawan Suphanburi","region":"Central","rsm":"Yuthtaphon"},"gwm-thairungruang-lopburi":{"ps":"GWM Thairungruang Lopburi","region":"Central","rsm":"Yuthtaphon"},"gwm-eaksaha-plus-buriram":{"ps":"GWM Eaksaha Plus Buriram","region":"Northeast","rsm":"Naruwit"},"gwm-finn-ev-nong-bua-lamphu":{"ps":"GWM Finn EV Nong Bua Lamphu","region":"Northeast","rsm":"Kiattikhun"},"gwm-m1x-phitsanulok":{"ps":"GWM M1X Phitsanulok","region":"North","rsm":"Natthaphol"},"gwm-big-auto-sisaket":{"ps":"GWM BIG AUTO Sisaket","region":"Northeast","rsm":"Kiattikhun"},"gwm-sitthiphan-phetchaburi":{"ps":"GWM Sitthiphan Phetchaburi","region":"Central","rsm":"Naruwit"},"gwm-startrek-suanluang":{"ps":"GWM Startrek Suanluang","region":"BKK&MET","rsm":"Natthaphol"},"gwm-iconic-ramintra":{"ps":"GWM Iconic Ramintra","region":"BKK&MET","rsm":"Chanrob"},"gwm-motor-mall-rama-2":{"ps":"GWM Motor Mall Rama 2","region":"BKK&MET","rsm":"Natchanon"},"gwm-m1x-maesod":{"ps":"GWM M1X Maesod","region":"North","rsm":"Natthaphol"},"gwm-ccc-auto-chiangmai":{"ps":"GWM CCC Auto Chiangmai","region":"North","rsm":"Natthaphol"},"gwm-prestige-thanyaburi":{"ps":"GWM Prestige Thanyaburi","region":"BKK&MET","rsm":"Yuthtaphon"},"gwm-kt-suratthani":{"ps":"GWM KT Suratthani","region":"South","rsm":"Natchanon"},"gwm-first-class-motor-chachoengsao":{"ps":"GWM First Class Motor Chachoengsao","region":"Easten","rsm":"Chanrob"},"gwm-origin-chumphon":{"ps":"GWM Origin Chumphon","region":"South","rsm":"Natchanon"},"gwm-suvarnabhumi-ladkrabang":{"ps":"GWM Suvarnabhumi Ladkrabang","region":"BKK&MET","rsm":"Yuthtaphon"},"gwm-pag-nakhonsawan":{"ps":"GWM PAG Nakhonsawan","region":"North","rsm":"Chanrob"},"gwm-premier-srinakarin":{"ps":"GWM Premier Srinakarin","region":"BKK&MET","rsm":"Natthaphol"},"gwm-nava-auto-navanakorn":{"ps":"GWM Nava Auto Navanakorn","region":"BKK&MET","rsm":"Naruwit"},"gwm-168-kanchanaphisek":{"ps":"GWM 168 Kanchanaphisek","region":"BKK&MET","rsm":"Natchanon"},"gwm-one-theparak":{"ps":"GWM One Theparak","region":"BKK&MET","rsm":"Natthaphol"},"gwm-ccc-auto-chiangmai-maerim":{"ps":"GWM CCC Auto Chiangmai Maerim","region":"North","rsm":"Natthaphol"},"gwm-ch-erawan-nakhonpathom":{"ps":"GWM Ch.Erawan Nakhonpathom","region":"Central","rsm":"Yuthtaphon"},"gwm-charoen-auto-house-chaiyaphum":{"ps":"GWM Charoen Auto House Chaiyaphum","region":"Northeast","rsm":"Chanrob"},"gwm-areemit-mahasarakham":{"ps":"GWM Areemit Mahasarakham","region":"Northeast","rsm":"Kiattikhun"},"gwm-ccc-auto-vacharaphol":{"ps":"GWM CCC Auto Vacharaphol","region":"BKK&MET","rsm":"Chanrob"},"gwm-tongcharoen-samutsakhon":{"ps":"GWM Tongcharoen Samutsakhon","region":"Central","rsm":"Yuthtaphon"},"gwm-life-nonthaburi":{"ps":"GWM Life Nonthaburi","region":"BKK&MET","rsm":"Kiattikhun"},"gwm-eaksaha-phahonyothin-km-25":{"ps":"GWM Eaksaha Phahonyothin KM.25","region":"BKK&MET","rsm":"Chanrob"},"gwm-anuphas-phuket-kathu":{"ps":"GWM Anuphas Phuket Kathu","region":"South","rsm":"Naruwit"},"gwm-ek-ari":{"ps":"GWM Ek Ari","region":"BKK&MET","rsm":"Kiattikhun"},"gwm-bangkok-chan-road":{"ps":"GWM Bangkok Chan Road","region":"BKK&MET","rsm":"Natchanon"},"gwm-yas-yala":{"ps":"GWM YAS YALA","region":"South","rsm":"Natchanon"},"gwm-teeka-udonthani":{"ps":"GWM Teeka Udonthani","region":"Northeast","rsm":"Kiattikhun"},"gwm-karman-wongsawang":{"ps":"GWM Karman Wongsawang","region":"BKK&MET","rsm":"Kiattikhun"},"gwm-ek-rayong-pluakdaeng":{"ps":"GWM Ek Rayong Pluakdaeng","region":"Central","rsm":"Chanrob"},"gwm-chookiat-songkhla":{"ps":"GWM Chookiat Songkhla","region":"South","rsm":"Natchanon"},"gwm-mm-lamphun":{"ps":"GWM MM Lamphun","region":"North","rsm":"Natthaphol"},"gwm-sahachai-ev-plus-khonkaen":{"ps":"GWM Sahachai EV Plus Khonkaen","region":"Northeast","rsm":"Kiattikhun"},"gwm-ek-chonburi":{"ps":"GWM Ek Chonburi","region":"Easten","rsm":"Chanrob"},"gwm-ek-pattaya":{"ps":"GWM Ek Pattaya","region":"Easten","rsm":"Chanrob"},"gwm-a-n-n-pattani":{"ps":"GWM A.N.N. Pattani","region":"South","rsm":"Natchanon"},"gwm-mundee-kalasin":{"ps":"GWM Mundee Kalasin","region":"Northeast","rsm":"Kiattikhun"},"gwm-aag-rangsit":{"ps":"GWM AAG Rangsit","region":"BKK&MET","rsm":"Naruwit"},"gwm-e-v-s-plus-nonthaburi":{"ps":"GWM E.V.S Plus Nonthaburi","region":"BKK&MET","rsm":"Kiattikhun"},"gwm-thaiyont-next-sisaket":{"ps":"GWM Thaiyont Next Sisaket","region":"Northeast","rsm":"Naruwit"},"gwm-metro-hathairat":{"ps":"GWM Metro Hathairat","region":"BKK&MET","rsm":"Yuthtaphon"},"gwm-maporn-lamlukka":{"ps":"GWM Maporn Lamlukka","region":"BKK&MET","rsm":"Naruwit"}};
+const DEFAULT_MAPS = { RSM1: cleanMap(DEFAULT_MAP), RSM2: cleanMap(DEFAULT_MAP2) };
+let MAPSET = 'RSM2';
+try { if (localStorage.getItem('csi2-rsmset') === 'RSM1') MAPSET = 'RSM1'; } catch (e) {}
 const calDoc = () => (S.calendar && S.calendar.ends && Object.keys(S.calendar.ends).length) ? S.calendar : DEFAULT_CAL;
 const usingDefaultCal = () => calDoc() === DEFAULT_CAL;
 function refreshCal(){ S.cal = buildCal(calDoc(), calUntil()); }
@@ -764,26 +769,40 @@ function detectKind(parsed){
 }
 
 /* mapping file: Store_Name, Region, RSM */
-function parseMappingWorkbook(wb){
-  for (const name of wb.SheetNames){
-    const aoa = XLSX.utils.sheet_to_json(wb.Sheets[name], {header:1, raw:true, defval:null});
-    for (let h = 0; h < Math.min(aoa.length, 15); h++){
-      const hdr = (aoa[h]||[]).map(v => String(v ?? '').trim());
-      const ps = hdr.findIndex(x => /^(store[ _]?name|ps|dealer|ศูนย์บริการ)$/i.test(x));
-      const rsm = hdr.findIndex(x => /^rsm/i.test(x));
-      if (ps >= 0 && rsm >= 0){
-        const rg = hdr.findIndex(x => /^region|ภาค/i.test(x));
-        const rows = {}; let n = 0, skipped = 0;
-        for (let r = h+1; r < aoa.length; r++){
-          const row = aoa[r] || []; const p = cleanStr(row[ps]);
-          if (!p){ if (row.some(v => v != null && v !== '')) skipped++; continue; }
-          rows[psKeyOf(p)] = { ps: psDisplay(p), rsm: cleanStr(row[rsm]), region: rg >= 0 ? cleanStr(row[rg]) : '' }; n++;
-        }
-        return { rows, n, skipped };
+function parseMapSheet(ws){
+  const aoa = XLSX.utils.sheet_to_json(ws, {header:1, raw:true, defval:null});
+  for (let h = 0; h < Math.min(aoa.length, 15); h++){
+    const hdr = (aoa[h]||[]).map(v => String(v ?? '').trim());
+    const ps = hdr.findIndex(x => /^(store[ _]?name|ps|dealer|ศูนย์บริการ)$/i.test(x));
+    const rsm = hdr.findIndex(x => /^rsm/i.test(x));
+    if (ps >= 0 && rsm >= 0){
+      const rg = hdr.findIndex(x => /^region|ภาค/i.test(x));
+      const rows = {}; let n = 0, skipped = 0;
+      for (let r = h+1; r < aoa.length; r++){
+        const row = aoa[r] || []; const p = cleanStr(row[ps]);
+        if (!p){ if (row.some(v => v != null && v !== '')) skipped++; continue; }
+        const rv = cleanStr(row[rsm]);
+        if (/^terminated$/i.test(rv)) { skipped++; continue; }   /* closed partner */
+        rows[psKeyOf(p)] = { ps: psDisplay(p), rsm: rv, region: rg >= 0 ? cleanStr(row[rg]) : '' }; n++;
       }
+      return { rows: cleanMap(rows), n, skipped };
     }
   }
-  throw new Error(t('err.mapHeader'));
+  return null;
+}
+function parseMappingWorkbook(wb){
+  const sets = {}; let first = null;
+  for (const name of wb.SheetNames){
+    const r = parseMapSheet(wb.Sheets[name]); if (!r) continue;
+    if (!first) first = r;
+    const k = /rsm\s*_?1/i.test(name) ? 'RSM1' : /rsm\s*_?2/i.test(name) ? 'RSM2' : null;
+    if (k && !sets[k]) sets[k] = r;
+  }
+  if (!first) throw new Error(t('err.mapHeader'));
+  if (!Object.keys(sets).length) return { ...first, sets: null };       /* single sheet → replaces the selected set */
+  const cur = sets[MAPSET] || Object.values(sets)[0];
+  const extra = {}; for (const k of Object.keys(sets)) if (sets[k] !== cur) extra[k] = sets[k].rows;
+  return { rows: cur.rows, n: Object.values(sets).reduce((a, x) => a + x.n, 0), skipped: cur.skipped, sets: extra };
 }
 
 /* ---------- storage encoding: one month split into parts under 180 KB ---------- */
@@ -856,7 +875,7 @@ const S = {
   parts: new Map(),       // docId -> {doc, recs}
   recs: [],               // all decoded records (deduped by key)
   byKey: new Map(),
-  mapping: DEFAULT_MAP, mappingIsDefault: true, mappingVer: 0, calendar: {}, cal: null,
+  mapping: DEFAULT_MAPS[MAPSET], maps: { ...DEFAULT_MAPS }, mappingIsDefault: true, mappingVer: 0, calendar: {}, cal: null,
   uploads: [],
   plansDocs: new Map(),   // docId -> plans doc
   myPlanDoc: null,
@@ -870,7 +889,9 @@ function memDB(){
   /* action plans survive in this browser (localStorage); everything else stays in memory */
   const LSK = 'csi2-plans';
   try { const o = JSON.parse(localStorage.getItem(LSK) || '{}'); for (const k of Object.keys(o)) if (k.startsWith('plans/')) docs.set(k, o[k]); } catch (e) {}
+  try { const mo = JSON.parse(localStorage.getItem('csi2-map') || 'null'); if (mo) docs.set('meta/mapping', mo); } catch (e) {}
   const persist = () => {
+    try { const mp = docs.get('meta/mapping'); if (mp) localStorage.setItem('csi2-map', JSON.stringify(mp)); } catch (e) {}
     try {
       const o = {}; for (const [k, v] of docs) if (k.startsWith('plans/') && v && Object.keys(v.items || {}).length) o[k] = v;
       if (Object.keys(o).length) localStorage.setItem(LSK, JSON.stringify(o)); else localStorage.removeItem(LSK);
@@ -946,7 +967,13 @@ function startSync(){
       for (const id of [...S.parts.keys()]) if (!seen.has(id)){ S.parts.delete(id); changed = true; }
       if (changed || !S.ready){ rebuildRecs(); S.ready = true; queueRender(); maybeEnsureRanks(); }
     }, e => { S.syncError = e?.code; S.ready = true; queueRender(); });
-    db.doc('meta/mapping').onSnapshot(s => { const rows = s.exists && s.data().rows; const has = rows && Object.keys(rows).length; S.mapping = has ? cleanMap(rows) : DEFAULT_MAP; S.mappingIsDefault = !has; S.mappingVer++; queueRender(); }, () => {});
+    db.doc('meta/mapping').onSnapshot(s => {
+      const d = s.exists ? s.data() : {}; let sets = d.sets;
+      if (!sets && d.rows && Object.keys(d.rows).length) sets = { RSM1: d.rows };
+      const pick = k => (sets && sets[k] && Object.keys(sets[k]).length) ? cleanMap(sets[k]) : DEFAULT_MAPS[k];
+      S.maps = { RSM1: pick('RSM1'), RSM2: pick('RSM2') }; S.mapping = S.maps[MAPSET];
+      S.mappingIsDefault = !(sets && (Object.keys(sets.RSM1 || {}).length || Object.keys(sets.RSM2 || {}).length)); S.mappingVer++; queueRender();
+    }, () => {});
     db.doc('meta/calendar').onSnapshot(s => { S.calendar = normalizeCal((s.exists && s.data()) || {}); refreshCal(); queueRender(); }, () => {});
     db.doc('meta/uploads').onSnapshot(s => { S.uploads = (s.exists && s.data().list) || []; queueRender(); }, () => {});
     db.collection('plans').onSnapshot(snap => { S.plansDocs = new Map(snap.docs.map(d => [d.id, d.data()])); resolveNames(); queueRender(); }, () => {});
@@ -1053,9 +1080,17 @@ async function deleteMonth(m){
   const list = [{ id: uid('x'), at: nowISO(), by: S.me.id, file: '—', action: 'delete', months: [m] }, ...S.uploads].slice(0, 100);
   await retryWrite(() => S.db.doc('meta/uploads').set({ list }));
 }
-async function saveMapping(rows){
-  await retryWrite(() => S.db.doc('meta/mapping').set({ rows, updatedAt: nowISO(), by: S.me.id }));
-  S.mapping = rows; S.mappingIsDefault = false;
+async function saveMapping(rows, extra){
+  const sets = { ...S.maps, ...(extra || {}), [MAPSET]: rows };
+  await retryWrite(() => S.db.doc('meta/mapping').set({ sets, updatedAt: nowISO(), by: S.me.id }));
+  S.maps = sets; S.mapping = rows; S.mappingIsDefault = false; S.mappingVer++;
+}
+function setRsmSet(k){
+  if (k === MAPSET || !S.maps[k]) return;
+  MAPSET = k; try { localStorage.setItem('csi2-rsmset', k); } catch (e) {}
+  S.mapping = S.maps[k]; S.mappingVer++; UP.mapDraft = null; UP.mapDraftSets = null;
+  F.rsm = new Set(); PF.rsm = ''; RO.rsm = ''; F.ps = ''; PF.ps = ''; RO.ps = '';
+  renderAll();
 }
 /* calendar: save and (optionally) re-assign the month of every stored record */
 async function saveCalendar(doc, remonth, onProgress){
@@ -1176,6 +1211,7 @@ function renderHeader(){
   $('roleBtn').textContent = t('role.backRsm');
   for (const b of document.querySelectorAll('#langSeg button')) b.setAttribute('aria-pressed', b.dataset.lang === L);
   applyTheme();
+  { const sg = $('setSeg'); sg.hidden = !isAdminView(); for (const b of sg.querySelectorAll('button')) b.setAttribute('aria-pressed', b.dataset.set === MAPSET); }
   $('gsearch').placeholder = t('search.ph');
   $('banner').hidden = !(S.local || S.syncError);
   $('banner').textContent = S.syncError ? t('banner.sync', { c: S.syncError }) : t('banner.local');
@@ -1923,7 +1959,7 @@ async function savePlan(state){
 }
 
 /* ================= Data management: CSI upload, mapping, history ================= */
-const UP = { scope: '', parsed: null, plan: null, busy: false, mapDraft: null, mapSearch: '', calDraft: null, calRemonth: true };
+const UP = { scope: '', parsed: null, plan: null, busy: false, mapDraft: null, mapDraftSets: null, mapSearch: '', calDraft: null, calRemonth: true };
 
 function renderAdmin(v){
   const pss = allPS();
@@ -2011,7 +2047,7 @@ async function addUnlisted(){
   busy(false); renderAll();
 }
 async function readMapFile(f){
-  try { const wb = XLSX.read(await f.arrayBuffer(), { type: 'array' }); const r = parseMappingWorkbook(wb); UP.mapDraft = r.rows; toast(t('ad.mapRead', { n: r.n })); }
+  try { const wb = XLSX.read(await f.arrayBuffer(), { type: 'array' }); const r = parseMappingWorkbook(wb); UP.mapDraft = r.rows; UP.mapDraftSets = r.sets || null; toast(t('ad.mapRead', { n: r.n })); }
   catch (e){ toast(e.message || t('err.read')); }
   renderAll();
 }
@@ -2025,7 +2061,7 @@ async function addPsRow(){
 async function saveMap(){
   const rows = UP.mapDraft || S.mapping;
   busy(true, t('saving'));
-  try { await saveMapping(rows); UP.mapDraft = null; toast(t('saved2')); } catch (e){ toast(dbErrMsg(e)); }
+  try { await saveMapping(rows, UP.mapDraftSets); UP.mapDraft = null; UP.mapDraftSets = null; toast(t('saved2')); } catch (e){ toast(dbErrMsg(e)); }
   busy(false); renderAll();
 }
 async function setMapRow(k, rsm){
@@ -2038,12 +2074,15 @@ async function setMapRow(k, rsm){
   renderAll();
 }
 async function downloadMapping(){
-  const src = UP.mapDraft || S.mapping;
-  const rows = allPS().map(p => [src[p.k]?.ps || p.name, src[p.k]?.region || '', src[p.k]?.rsm || '']);
-  for (const [k, v] of Object.entries(src)) if (!rows.some(r => psKeyOf(r[0]) === k)) rows.push([v.ps, v.region, v.rsm]);
-  rows.sort((a,b) => (a[2] || 'zzz').localeCompare(b[2] || 'zzz') || a[0].localeCompare(b[0]));
-  const ws = XLSX.utils.aoa_to_sheet([['Store_Name', 'Region', 'RSM'], ...rows]); ws['!cols'] = [{ wch: 40 }, { wch: 14 }, { wch: 16 }];
-  const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, 'RSM mapping');
+  const wb = XLSX.utils.book_new();
+  const sheet = (name, src) => {
+    const rows = allPS().map(p => [src[p.k]?.ps || p.name, src[p.k]?.region || '', src[p.k]?.rsm || '']);
+    for (const [k, v] of Object.entries(src)) if (!rows.some(r => psKeyOf(r[0]) === k)) rows.push([v.ps, v.region, v.rsm]);
+    rows.sort((a,b) => (a[2] || 'zzz').localeCompare(b[2] || 'zzz') || a[0].localeCompare(b[0]));
+    const ws = XLSX.utils.aoa_to_sheet([['Store_Name', 'Region', name], ...rows]); ws['!cols'] = [{ wch: 40 }, { wch: 14 }, { wch: 16 }];
+    XLSX.utils.book_append_sheet(wb, ws, name);
+  };
+  for (const k of ['RSM1', 'RSM2']) sheet(k, k === MAPSET ? (UP.mapDraft || S.mapping) : ((UP.mapDraftSets && UP.mapDraftSets[k]) || S.maps[k]));
   await saveFile(`RSM_mapping_${todayISO()}.xlsx`, XLSX.write(wb, { bookType: 'xlsx', type: 'array' }), 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 }
 
@@ -2612,7 +2651,7 @@ const ACTS = {
   calProv: k => setMonthProvisional(k),
   dlMap: () => downloadMapping(),
   saveMap: () => saveMap(),
-  cancelMap: () => { UP.mapDraft = null; renderAll(); },
+  cancelMap: () => { UP.mapDraft = null; UP.mapDraftSets = null; renderAll(); },
   delMonth: () => { const m = $('delMonth').value; if (!m) return; $('delConfirm').innerHTML = `<span class="small">${t('ad.confirmDel', { m: monLabel(m) })}</span> <button class="btn sm danger" data-act="delMonthYes" data-key="${m}">${t('ad.yesDelete')}</button>`; },
   delMonthYes: async k => { busy(true, t('saving')); try { await deleteMonth(k); toast(t('saved2')); } catch (e){ toast(dbErrMsg(e)); } busy(false); },
   /* report */
@@ -2639,6 +2678,7 @@ function bindHeader(){
   let tm; $('gsearch').addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(renderSearchResults, 150); });
   $('gsearch').addEventListener('focus', renderSearchResults);
   $('gsearch').addEventListener('keydown', e => { if (e.key === 'Enter'){ const res = searchRecs(e.target.value); if (res.length === 1) openSP(res[0].key); else if (res.length){ F.data.search = e.target.value.trim(); F.data.page = 0; $('gresults').hidden = true; setTab('data'); } } });
+  for (const b of document.querySelectorAll('#setSeg button')) b.onclick = () => setRsmSet(b.dataset.set);
   for (const b of document.querySelectorAll('#langSeg button')) b.onclick = () => { setLang(b.dataset.lang); RO.lang = b.dataset.lang; renderAll(); };
   $('gFile').onchange = e => { const f = e.target.files[0]; e.target.value = ''; if (f) handleFile(f); };
   window.addEventListener('dragover', e => { if (e.dataTransfer?.types?.includes('Files')) e.preventDefault(); });
